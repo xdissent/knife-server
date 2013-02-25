@@ -89,12 +89,15 @@ SOLO_RB
   cat <<BOOTSTRAP_JSON > $tmp_solo/bootstrap.json
 {
   "chef-server" : {
+    "api_fqdn" : "<%= @name_args.first %>",
     "prereleases" : true,
-    "chef-server-webui" : {
-      "web_ui_admin_default_password" : "$webui_password"
-    },
-    "rabbitmq" : {
-      "password" : "$amqp_password"
+    "configuration" : {
+      "chef-server-webui" : {
+        "web_ui_admin_default_password" : "$webui_password"
+      },
+      "rabbitmq" : {
+        "password" : "$amqp_password"
+      }
     }
   },
   "run_list" : [ "recipe[chef-server]" ]
