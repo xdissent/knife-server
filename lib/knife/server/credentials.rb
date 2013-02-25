@@ -53,12 +53,10 @@ module Knife
 
         omnibus_cmd = [
           "knife configure",
-          "--initial",
+          "--key /etc/chef-server/admin.pem",
           "--server-url http://127.0.0.1:8000",
-          "--user root",
+          "--user admin",
           '--repository ""',
-          "--admin-client-name chef-webui",
-          "--admin-client-key /etc/chef-server/chef-webui.pem",
           "--validation-client-name chef-validator",
           "--validation-key /etc/chef-server/chef-validator.pem",
           "--defaults --yes"

@@ -61,6 +61,7 @@ class Chef
         ].each { |attr| bootstrap.config[attr] = config[attr] }
         bootstrap.config[:distro] = bootstrap_distro
         bootstrap.config[:use_sudo] = true unless config[:ssh_user] == "root"
+        bootstrap.config[:api_fqdn] = config[:host]
         bootstrap
       end
 

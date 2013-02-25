@@ -89,7 +89,7 @@ SOLO_RB
   cat <<BOOTSTRAP_JSON > $tmp_solo/bootstrap.json
 {
   "chef-server" : {
-    "api_fqdn" : "<%= @name_args.first %>",
+    "api_fqdn" : "<%= @config[:api_fqdn] %>",
     "prereleases" : true,
     "configuration" : {
       "chef-server-webui" : {
@@ -97,6 +97,9 @@ SOLO_RB
       },
       "rabbitmq" : {
         "password" : "$amqp_password"
+      },
+      "bookshelf" : {
+        "vip" : "<%= @config[:api_fqdn] %>"
       }
     }
   },
@@ -117,7 +120,7 @@ run_chef_solo() {
 
 cleanup() {
   for bin in chef-client chef-solo knife ohai shef ; do
-    ln -snf /opt/chef-server/bin/$bin /usr/bin/$bin
+    ln -snf /opt/chef-server/embedded/bin/$bin /usr/bin/$bin
   done ; unset bin
 
   rm -rf /opt/chef
